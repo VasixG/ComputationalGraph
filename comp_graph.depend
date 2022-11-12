@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1652200065 source:c:\users\vasil\documents\c\comp_graph\main.c
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	"comp_graph.h"
+
+1652189990 c:\users\vasil\documents\c\comp_graph\comp_graph.h
+
+1652200138 source:c:\users\vasil\documents\c\comp_graph\comp_func.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"comp_graph.h"
+
+1652185738 source:c:\users\vasil\onedrive\Документы\telegram\comp_graph\comp_func.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	"comp_graph.h"
+
+1652175590 c:\users\vasil\onedrive\Документы\telegram\comp_graph\comp_graph.h
+
+1652185883 source:c:\users\vasil\onedrive\Документы\telegram\comp_graph\main.c
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	"comp_graph.h"
+
