@@ -1,11 +1,18 @@
-﻿  comp_func.c
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_graph.h(3,1): warning C4005: NULL: изменение макроопределения
+﻿  computational_graph.c
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_graph.h(9,1): warning C4005: NULL: изменение макроопределения
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vcruntime.h(235,1): message : см. предыдущее определение "NULL"
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_func.c(49,112): warning C4029: объявленный список формальных параметров отличается от объявления
-  computational_graph.c
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_graph.h(3,1): warning C4005: NULL: изменение макроопределения
+  systems.c
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_graph.h(9,1): warning C4005: NULL: изменение макроопределения
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vcruntime.h(235,1): message : см. предыдущее определение "NULL"
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(37,24): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(41,30): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(47,42): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(49,42): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(51,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(53,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(55,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(57,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(59,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(61,40): warning C4098: fist_nonlinear_system: функция типа "void", возвращающая значение
   Создание кода...
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_func.c(87): warning C4715: link_nodes: значение возвращается не при всех путях выполнения
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\comp_func.c(216): warning C4716: node_free: должна возвращать значение
   computational_graph.vcxproj -> C:\Users\vasil\Documents\CodeBlocks\computational_graph\x64\Debug\computational_graph.exe

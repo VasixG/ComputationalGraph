@@ -21,9 +21,15 @@
     <ClCompile Include="comp_func.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="systems.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comp_graph.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="systems.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

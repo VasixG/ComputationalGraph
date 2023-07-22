@@ -1,5 +1,11 @@
 #pragma once
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
 #define NULL ((void*)0)
 
 typedef double (*func)(double, double*);
