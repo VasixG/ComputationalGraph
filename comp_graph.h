@@ -5,9 +5,6 @@
 #include <string.h>
 #include <math.h>
 
-
-#define NULL ((void*)0)
-
 typedef double (*func)(double, double*);
 typedef double (*d_func)(double, double*);
 

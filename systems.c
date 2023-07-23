@@ -1,6 +1,6 @@
 #include "systems.h"
 
-void fist_nonlinear_system() {
+int fist_nonlinear_system() {
 
     node* r_1, * r_2, * h_1, * h_2, * h_3, * v_1, * v_2, * l_r_1, * l_r_2;
     c_graph* c_gp;
@@ -97,4 +97,6 @@ void fist_nonlinear_system() {
     printf("\n\nShould be: out of first equation = %lf\nSecond equation = %lf\n\n", a - (1 - b) * (1 - b), b);
 
     cgraph_free(c_gp, n);
+
+    return 0;
 }

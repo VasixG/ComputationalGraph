@@ -42,7 +42,7 @@ double sqr(double x, double* p) {
 }
 
 //allocate memory for node
-node* node_alloc(double val, double grad, double* p, size_t n, func a_func, d_func d_a_func, size_t c, int id) {
+node* node_alloc(double val, double grad, double* p, size_t n, func a_func, d_func d_a_func, size_t c) {
 
     node* nd = malloc(sizeof(node));
 
@@ -80,6 +80,8 @@ void* link_nodes(node* nd1, node* nd2) {
     (nd1->prev)[nd1->curr_c] = nd2;
     ++nd2->ref_num;
     ++nd1->curr_c;
+
+    return nd1;
 }
 
 //renew computational graph
@@ -208,6 +210,7 @@ int node_free(node* nd) {
         nd->prev = NULL;
 
     }
+    return 0;
         
 }
 

@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClCompile Include="computational_graph.c" />
     <ClCompile Include="comp_func.c" />
+    <ClCompile Include="neural_network.c" />
     <ClCompile Include="systems.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="comp_graph.h" />
+    <ClInclude Include="neural_network.h" />
     <ClInclude Include="systems.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
