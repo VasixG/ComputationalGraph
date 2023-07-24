@@ -62,6 +62,10 @@ double der_sqr(double x, double* p);//derivative of square equation
 
 double der_linear(double x, double* p);//derivative of linear equation
 
+double leakyReLU(double x, double* p);//leaky ReLU
+
+double der_leakyReLU(double x, double* p);//leaky ReLU
+
 double forward_propagation(c_graph* c_gp, size_t n);//forward propagation of computational graph
 
 double backward_propagation(c_graph* c_gp, size_t n);//backward propagation of computational graph

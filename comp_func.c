@@ -28,7 +28,25 @@ double der_sqr(double x, double* p) {
 
 //derivative of linear equation
 double der_linear(double x, double* p) {
-    return p[0];
+    if (p[0]) return p[0];
+    return 1;
+}
+
+//leaky ReLU
+double leakyReLU(double x, double* p)
+{
+    if (x>0) return p[0]*x;
+
+    return p[1] * x;
+}
+
+
+//derivative of leaky ReLU
+double der_leakyReLU(double x, double* p)
+{
+    if (x > 0) return p[0];
+
+    return p[1];
 }
 
 //linear equation
@@ -115,6 +133,7 @@ void renew_node(node* nd) {
     }
 
 }
+
 
 double forward_propagation(c_graph* c_gp, size_t n) {
 
