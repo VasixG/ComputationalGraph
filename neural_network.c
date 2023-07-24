@@ -7,13 +7,13 @@ int first_neural_network() {
     c_graph* c_gp;
 
     double p_w1[3] = { 0.1, 0, 0.3 }, p_w2[3] = { 0.3, 0, 0.5 },
-        p_b1[3] = {0,0.6,0.7}, p_b2[3] = {0, 0.8, 0.9}, p_input[3] = {1,0,0}, p_output[3] = {1,0, 0}, p_loss_1[3] = {0.1}, p_loss_2[3] = { 0.1 },
-        p_w3[3] = { 4, 0, 0.3 }, p_w4[3] = { 1, 0, 0.5 }, p_b3[3] = { 0,0.4,0.7 }, p_b4[3] = { 0, 3, 0.9 };
+        p_b1[3] = {1,0.6,0.7}, p_b2[3] = {1, 0.8, 0.9}, p_input[3] = {1,0,0}, p_output[3] = {1,0, 0}, p_loss_1[3] = {0.1}, p_loss_2[3] = { 0.1 },
+        p_w3[3] = { 4, 0, 0.3 }, p_w4[3] = { 1, 0, 0.5 }, p_b3[3] = { 1,0.4,0.7 }, p_b4[3] = { 1, 3, 0.9 };
     double p_a1[3] = { 3, 0 }, p_a2[3] = { 0.2, 0}, p_a3[3] = { 4, 0 }, p_a4[3] = { 0.3, 0.2 };
 
     size_t n = 2;
 
-    double learn_rate = 0.01;
+    double learn_rate = 0.1;
 
     double iter = 10000;
 
@@ -127,7 +127,7 @@ int first_neural_network() {
 
     if (!link_nodes(h_4, input_3)) return 3;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 1; ++i) {
         // Generate random input and set the target
         double inputs[3] = { ((double)rand() / RAND_MAX)/2,
                            ( (double)rand() / RAND_MAX)/2 ,
@@ -141,7 +141,7 @@ int first_neural_network() {
 
         loss_2->params[0] = inputs[0] * inputs[2] + inputs[1];
 
-        for(int j =0 ; j <10;++j){
+        for(int j =0 ; j <1000;++j){
 
             forward_propagation(c_gp, n);
             backward_propagation(c_gp, n);
@@ -158,8 +158,9 @@ int first_neural_network() {
             b_3->params[1] += -learn_rate * a_h_3->gradient;
             b_4->params[1] += -learn_rate * a_h_4->gradient;
 
-            //printf("mse 1: %lf \n", loss_1->act_func(loss_1->value, loss_1->params));
-            //printf("mse 2: %lf \n", loss_2->act_func(loss_2->value, loss_2->params));
+            printf("mse 1: %lf \n", loss_1->act_func(loss_1->value, loss_1->params));
+            printf("mse 2: %lf \n", loss_2->act_func(loss_2->value, loss_2->params));
+            printf("\n");
 
             renew_c_graph(c_gp, n);
         }
@@ -177,6 +178,9 @@ int first_neural_network() {
 
     printf("Real output 1: %lf\n", input_1->value + input_3->value);
     printf("Real output 2: %lf\n", input_1->value* input_3->value + input_2->value);
+
+    printf("mse 1: %lf\n", input_1->value + input_3->value);
+    printf("mse 2: %lf\n", input_1->value * input_3->value + input_2->value);
 
     cgraph_free(c_gp, n);
 

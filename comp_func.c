@@ -28,8 +28,7 @@ double der_sqr(double x, double* p) {
 
 //derivative of linear equation
 double der_linear(double x, double* p) {
-    if (p[0]) return p[0];
-    return 1;
+    return p[0];
 }
 
 //leaky ReLU

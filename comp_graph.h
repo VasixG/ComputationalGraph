@@ -10,7 +10,6 @@ typedef double (*d_func)(double, double*);
 
 typedef struct node
 {
-    int id;
     size_t ref_num;
 
     double value;
