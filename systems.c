@@ -71,6 +71,8 @@ int fist_nonlinear_system() {
 
         v_2->value -= learn_rate * v_2->gradient;
 
+        printf("%lf\n", l_r_1->value);
+
         renew_c_graph(c_gp, n);
 
     }
