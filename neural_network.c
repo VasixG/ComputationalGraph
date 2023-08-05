@@ -156,12 +156,12 @@ void* first_neural_network() {
 
     int n_activate_params_layer_1 = 2, n_loss_params = 1;
 
-    double activate_params_layer_1[8] = { 1.1,0,1,0,1.5,0,1,0 }, activate_params_layer_2[16] = {1,0,2,0,1,0,1,0,1,0,1,0,1,0,1,0},
-        activate_params_layer_3[8] = { 1.2,0,1,0.01,1,0.02,1.2,0 };
+    double activate_params_layer_1[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 }, activate_params_layer_2[16] = {0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01},
+        activate_params_layer_3[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 };
 
     double loss_params[2] = { 0, 0};
     
-    double learn_rate = 0.01;
+    double learn_rate = 0.0001;
 
     double iter = 50, element_iter = 5;
 
@@ -207,7 +207,7 @@ void* first_neural_network() {
         // Generate random input and set the target
 
         for (int i = 0; i < n_input; ++i) {
-            inputs[i] = ((double)rand() / RAND_MAX) / 2;
+            inputs[i] = (double) rand() / (double) RAND_MAX;
         }
 
         for (int i = 0; i < n_input; ++i) {
@@ -244,23 +244,41 @@ void* first_neural_network() {
         
     }
 
-    input[0]->value = 0.9;
-    input[1]->value = 0.05;
-    input[2] ->value = 0.3;
+    double inps[10][3] = {
+	{0.4623, 0.3280, 0.9125},
+        {0.6169, 0.9395, 0.7119},
+        {0.4685, 0.6560, 0.1282},
+        {0.9778, 0.6927, 0.0153},
+        {0.7530, 0.7885, 0.2757},
+        {0.7047, 0.3323, 0.6558},
+        {0.9477, 0.5339, 0.5517},
+        {0.9938, 0.2573, 0.2315},
+        {0.1811, 0.5801, 0.4813},
+        {0.1455, 0.5687, 0.7068}
+    };
+    
+    double SE = 0.0;
+    
+    for (int i = 0; i < 10; ++i) {
+        input[0]->value = inps[i][0];
+    	input[1]->value = inps[i][1];
+    	input[2]->value = inps[i][2];
+    	
+    	double first_label = input[0]->value + input[2]->value;
+    	double second_label = input[0]->value * input[2]->value + input[1]->value;
+    	
+    	loss[0]->params[0] = input[0]->value + input[2]->value;
+    	loss[0]->params[1] = input[0]->value * input[2]->value + input[1]->value;
+    	
+    	forward_propagation(c_gp, n_output);
+    	
+    	SE += (output[0]->value - first_label) * (output[0]->value - first_label);
+    	SE += (output[1]->value - first_label) * (output[1]->value - first_label);
+    	
+    	renew_c_graph(c_gp, n_output);
+    }
 
-    loss[0]->params[0] = input[0]->value + input[2]->value;
-    loss[0]->params[1] = input[0]->value * input[2]->value + input[1]->value;
-
-    forward_propagation(c_gp, n_output);
-
-    printf("Network output 1: %lf\n", output[0]->value);
-    printf("Network output 1: %lf\n", output[1]->value);
-
-    printf("Real output 1: %lf\n", input[0]->value + input[2]->value);
-    printf("Real output 2: %lf\n", input[0]->value * input[2]->value + input[1]->value);
-
-    printf("mse 1: %lf \n", loss[0]->act_func(loss[0]->value, loss[0]->params));
-    printf("mse 2: %lf \n", loss[1]->act_func(loss[1]->value, loss[1]->params));
+    printf("MSE: %lf \n", SE / 10);
 
     cgraph_free(c_gp, n_output);
 
