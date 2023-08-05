@@ -47,6 +47,12 @@ void renew_node(node* nd);//renew node
 
 double sqr(double x, double* p);//square equation with parametrs
 
+double trd(double x, double* p);//p[0]x^3 + p[1]*x^2 + p[2]*x
+
+double natural_log(double x, double* p);//ln(x), x>0
+
+double exponent(double x, double* p);// exp(x)
+
 double linear(double x, double* p);//linear with parametrs
 
 double der_mse(double x, double* p);//derivative of mse
@@ -60,6 +66,12 @@ double der_tanh_loss(double x, double* p);//derivative of tanh loss
 double der_sqr(double x, double* p);//derivative of square equation
 
 double der_linear(double x, double* p);//derivative of linear equation
+
+double der_trd(double x, double* p);//derivative of trd
+
+double der_natural_log(double x, double* p); // 1/x
+
+double der_exponent(double x, double* p);// exp(x)
 
 double leakyReLU(double x, double* p);//leaky ReLU
 

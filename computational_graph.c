@@ -9,7 +9,7 @@
 
 int main()
 {
-    if(!first_neural_network()) return 1;
-    //fist_nonlinear_system();
+    //if(!first_neural_network()) return 1;
+    second_nonlinear_system();
     return 0;
 }

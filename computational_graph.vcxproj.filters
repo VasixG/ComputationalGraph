@@ -18,13 +18,13 @@
     <ClCompile Include="computational_graph.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="comp_func.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="systems.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="neural_network.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="comp_graph.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

@@ -161,7 +161,7 @@ void* first_neural_network() {
 
     double loss_params[2] = { 0, 0};
     
-    double learn_rate = 0.0001;
+    double learn_rate = 0.01;
 
     double iter = 50, element_iter = 5;
 

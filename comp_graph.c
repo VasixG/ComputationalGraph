@@ -31,10 +31,25 @@ double der_linear(double x, double* p) {
     return p[0];
 }
 
+double der_trd(double x, double* p)
+{
+    return p[0] * 3 * x * x + p[1] * 2 * x + p[2];
+}
+
+double der_natural_log(double x, double* p)
+{
+    return 1 / x;
+}
+
+double der_exponent(double x, double* p)
+{
+    return exp(x);
+}
+
 //leaky ReLU
 double leakyReLU(double x, double* p)
 {
-    if (x>0) return p[0]*x;
+    if (x > 0) return p[0] * x;
 
     return p[1] * x;
 }
@@ -56,6 +71,21 @@ double linear(double x, double* p) {
 //square equation
 double sqr(double x, double* p) {
     return p[0] * x * x + p[1] * x + p[2];
+}
+
+double trd(double x, double* p)
+{
+    return p[0] * x * x * x + p[1] * x * x + p[2] * x + p[3];
+}
+
+double natural_log(double x, double* p)
+{
+    return log(x);
+}
+
+double exponent(double x, double* p)
+{
+    return exp(x);
 }
 
 //allocate memory for node
@@ -209,18 +239,19 @@ int node_free(node* nd) {
 
                 if (!(nd->prev)[i]->ref_num) free((nd->prev)[i]);
 
-            }else {
+            }
+            else {
 
                 --(nd->prev)[i]->ref_num;
 
                 --(nd->c);
 
                 if (!(nd->prev)[i]->ref_num) free((nd->prev)[i]);
-               
+
             }
         }
     }
-    
+
     if (nd->prev) {
 
         free(nd->prev);
@@ -229,7 +260,7 @@ int node_free(node* nd) {
 
     }
     return 0;
-        
+
 }
 
 void cgraph_free(c_graph* c_gp, size_t n) {

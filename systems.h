@@ -2,4 +2,7 @@
 
 #include "comp_graph.h"
 
-int fist_nonlinear_system();//solving a nonlinear system by the gradient descent method
+void* fist_nonlinear_system();//solving a nonlinear system by the gradient descent method
+
+void* second_nonlinear_system();//solving a nonlinear system by the gradient descent method
+

@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="computational_graph.c" />
-    <ClCompile Include="comp_func.c" />
+    <ClCompile Include="comp_graph.c" />
     <ClCompile Include="neural_network.c" />
     <ClCompile Include="systems.c" />
   </ItemGroup>

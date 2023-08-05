@@ -1,4 +1,9 @@
-﻿  neural_network.c
+﻿  computational_graph.c
+  comp_graph.c
+  neural_network.c
+  systems.c
+  Создание кода...
+C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(102): warning C4715: fist_nonlinear_system: значение возвращается не при всех путях выполнения
 C:\Users\vasil\Documents\CodeBlocks\computational_graph\neural_network.c(148): warning C4716: dense_fit: должна возвращать значение
 C:\Users\vasil\Documents\CodeBlocks\computational_graph\neural_network.c(267): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
   computational_graph.vcxproj -> C:\Users\vasil\Documents\CodeBlocks\computational_graph\x64\Debug\computational_graph.exe
