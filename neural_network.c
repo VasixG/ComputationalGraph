@@ -134,15 +134,25 @@ node** loss_layer(int n, node** node_prev, double* params, size_t num_params, fu
 }
 
 
-void* dense_fit(size_t n, node** dense_root, double learning_rate) {
+void* dense_fit(size_t n, node** dense_root, double learning_rate, double beta1, double beta2, double epsilon) {
 
     for (int i = 0; i < n; ++i) {
-        (dense_root[i]->prev)[0]->params[1] += -learning_rate * dense_root[i]->gradient;
+        ++(dense_root[i]->prev)[0]->time;
+        (dense_root[i]->prev)[0]->first_moment = beta1 * (dense_root[i]->prev)[0]->first_moment + (1 - beta1) * dense_root[i]->gradient;
+        (dense_root[i]->prev)[0]->second_moment = beta2 * (dense_root[i]->prev)[0]->second_moment + (1 - beta2) * dense_root[i]->gradient* dense_root[i]->gradient;
+        float m_hat = (dense_root[i]->prev)[0]->first_moment / (1 - pow(beta1, (dense_root[i]->prev)[0]->time));
+        float v_hat = (dense_root[i]->prev)[0]->second_moment / (1 - pow(beta2, (dense_root[i]->prev)[0]->time));
+        (dense_root[i]->prev)[0]->params[1] += -learning_rate * m_hat / (sqrt(v_hat) + epsilon);
     }
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < (dense_root[i]->prev)[0]->c; ++j) {
-            ((dense_root[i]->prev)[0]->prev)[j]->params[0] += -learning_rate * ((dense_root[i]->prev)[0]->prev)[j]->gradient;
+            ++((dense_root[i]->prev)[0]->prev)[j]->time;
+            ((dense_root[i]->prev)[0]->prev)[j]->first_moment = beta1 * ((dense_root[i]->prev)[0]->prev)[j]->first_moment + (1 - beta1) * ((dense_root[i]->prev)[0]->prev)[j]->gradient;
+            ((dense_root[i]->prev)[0]->prev)[j]->second_moment = beta2 * ((dense_root[i]->prev)[0]->prev)[j]->second_moment + (1 - beta2) * ((dense_root[i]->prev)[0]->prev)[j]->gradient * ((dense_root[i]->prev)[0]->prev)[j]->gradient;
+            float m_hat_w = ((dense_root[i]->prev)[0]->prev)[j]->first_moment / (1 - pow(beta1, ((dense_root[i]->prev)[0]->prev)[j]->time));
+            float v_hat_w = ((dense_root[i]->prev)[0]->prev)[j]->second_moment / (1 - pow(beta2, ((dense_root[i]->prev)[0]->prev)[j]->time));
+            ((dense_root[i]->prev)[0]->prev)[j]->params[0] += -learning_rate * m_hat_w / (sqrt(v_hat_w) + epsilon);
         }
     }
 }
@@ -161,9 +171,9 @@ void* first_neural_network() {
 
     double loss_params[2] = { 0, 0};
     
-    double learn_rate = 0.0001;
+    double learn_rate = 0.0001, beta1 = 0.9, beta2 = 0.999, epsilon = 10e-8;
 
-    double iter = 50, element_iter = 5;
+    int iter = 50, element_iter = 5;
 
     node** input = input_layer(3);
 
@@ -228,11 +238,11 @@ void* first_neural_network() {
 
             backward_propagation(c_gp, n_output);
 
-            dense_fit(4, h_layer_1, learn_rate);
+            dense_fit(4, h_layer_1, learn_rate, beta1, beta2, epsilon);
 
-            dense_fit(8, h_layer_2, learn_rate);
+            dense_fit(8, h_layer_2, learn_rate, beta1, beta2, epsilon);
 
-            dense_fit(4, h_layer_3, learn_rate);
+            dense_fit(4, h_layer_3, learn_rate, beta1, beta2, epsilon);
 
             printf("mse 1: %lf \n", loss[0]->act_func(loss[0]->value, loss[0]->params));
             printf("mse 2: %lf \n", loss[1]->act_func(loss[1]->value, loss[1]->params));

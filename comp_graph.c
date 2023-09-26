@@ -118,6 +118,11 @@ node* node_alloc(double val, double grad, double* p, size_t n, func a_func, d_fu
     nd->ref_num = 0;
     nd->curr_c = 0;
 
+    nd->first_moment = 0;
+    nd->second_moment = 0;
+    
+    nd->time = 0;
+
     return nd;
 }
 

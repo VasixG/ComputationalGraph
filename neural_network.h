@@ -10,4 +10,6 @@ node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_
 
 node** loss_layer(int n, node** node_prev,  double* params, size_t num_params, func loss_func, d_func der_loss_func);
 
+void* dense_fit(size_t n, node** dense_root, double learning_rate, double beta1, double beta2, double epsilon);//fit dense layer
+
 void* first_neural_network();//first neural network
