@@ -171,9 +171,9 @@ void* first_neural_network() {
 
     double loss_params[2] = { 0, 0};
     
-    double learn_rate = 0.0001, beta1 = 0.9, beta2 = 0.999, epsilon = 10e-8;
+    double learn_rate = 0.0001, beta1 = 0.7, beta2 = 0.2, epsilon = 10e-8;
 
-    int iter = 100, element_iter = 1;
+    int iter = 10, element_iter = 100;
 
     node** input = input_layer(3);
 
