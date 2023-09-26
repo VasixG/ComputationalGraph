@@ -173,7 +173,7 @@ void* first_neural_network() {
     
     double learn_rate = 0.0001, beta1 = 0.9, beta2 = 0.999, epsilon = 10e-8;
 
-    int iter = 50, element_iter = 5;
+    int iter = 100, element_iter = 1;
 
     node** input = input_layer(3);
 
