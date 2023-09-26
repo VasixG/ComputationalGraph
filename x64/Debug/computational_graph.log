@@ -3,7 +3,8 @@
   neural_network.c
   systems.c
   Создание кода...
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\systems.c(102): warning C4715: fist_nonlinear_system: значение возвращается не при всех путях выполнения
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\neural_network.c(148): warning C4716: dense_fit: должна возвращать значение
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\neural_network.c(267): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
-  computational_graph.vcxproj -> C:\Users\vasil\Documents\CodeBlocks\computational_graph\x64\Debug\computational_graph.exe
+C:\Users\vasil\Documents\ComputationalGraph\systems.c(102): warning C4715: fist_nonlinear_system: значение возвращается не при всех путях выполнения
+C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(148): warning C4716: dense_fit: должна возвращать значение
+C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(285): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
+  LINK : не найден или не выполнена сборка C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe при последней инкрементной компоновке; выполняется полная компоновка
+  computational_graph.vcxproj -> C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe

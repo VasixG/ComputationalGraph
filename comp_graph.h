@@ -14,7 +14,6 @@ typedef struct node
 
     double value;
     double gradient;
-    double first_moment;
 
     struct node** prev;
     size_t c;
