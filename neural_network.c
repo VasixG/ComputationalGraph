@@ -185,14 +185,14 @@ void* first_neural_network() {
 
     if (!input) return NULL;
 
-    node** h_layer_1 = dense_layer(4, input, 3, activate_params_layer_1, 2, leakyReLU, weights_heap, biases_heap);
+    node** h_layer_1 = dense_layer(2, input, 3, activate_params_layer_1, 2, leakyReLU, weights_heap, biases_heap);
 
     free(weights_heap);
     free(biases_heap);
 
     if (!h_layer_1) return NULL;
 
-    node** output = output_layer(2, h_layer_1, 4);
+    node** output = output_layer(2, h_layer_1, 2);
 
     if (!output) return NULL;
 
