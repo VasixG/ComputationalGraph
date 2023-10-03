@@ -31,10 +31,6 @@ git checkout -b <СУФФИКС/НАЗВАНИЕ_НОВОЙ_ВЕТКИ>
     git push origin <new_feature>
     ```
 
-5. После того, как код готов для основной ветки разработки:
-      ```bash
-      git pull origin dev
-      ```
 ## Оформление коммитов
 
 ### Правила оформления(можно прочитать [тут](https://www.conventionalcommits.org/en/v1.0.0/) ):
