@@ -159,8 +159,8 @@ void* first_neural_network() {
 
     double activate_params_layer_1[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 };
 
-    double weights[4][3] = { {1,2,3}, {1,2,3},{1,2,3},{1,2,3} };
-    double biases[4] = { 1,2,3,4};
+    double weights[4][3] = { {1,2,3}, {1,2,3}};
+    double biases[4] = { 1,2};
 
     double loss_params[2] = { 0, 0};
 
