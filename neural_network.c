@@ -51,11 +51,42 @@ node** output_layer(int n, node** prev, size_t num_prev)
     return output_neurons;
 }
 
-node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_t num_params, func a_func)
+node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_t num_params, func a_func, double** custom_weights, double* custom_biases)
 {
     double* weights = malloc(n * num_prev * 2 * sizeof(double));
+    if (!weights) return NULL;
+    if (!custom_weights) {
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < num_prev; ++j) {
+                weights[(i * num_prev + j) * 2] = ((double)rand() / RAND_MAX) - 0.5; 
+                weights[(i * num_prev + j) * 2 + 1] = 0; 
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < num_prev; ++j) {
+                weights[(i * num_prev + j) * 2] = custom_weights[i][j]; 
+                weights[(i * num_prev + j) * 2 + 1] = 0; 
+            }
+        }
+    }
 
     double* biases = malloc(n * 2 * sizeof(double));
+    if (!biases) return NULL;
+    if (!custom_biases) {
+        for (int i = 0; i < n; ++i) {
+            biases[i * 2] = 1;
+            biases[1 + i * 2] = ((double)rand() / RAND_MAX) - 0.5;
+        }
+    }
+    else {
+        for (int i = 0; i < n; ++i) {
+            biases[i * 2] = 1;
+            biases[1 + i * 2] = biases[i];
+        }
+    }
+    
 
     node** weight_neurons = malloc(n * num_prev * sizeof(node*));
 
@@ -65,23 +96,8 @@ node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_
 
     if (!weight_neurons) return NULL;
 
-    if (!weights) return NULL;
-
-    if (!biases) return NULL;
-
     if (!activation_neurons) return NULL;
 
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < num_prev; ++j) {
-            weights[(i * num_prev + j) * 2] = ((double)rand() / RAND_MAX)-0.5; // arr[i, j, 0] = 1
-            weights[(i * num_prev + j) * 2 + 1] = 0; // arr[i, j, 1] = 0
-        }
-    }
-
-    for (int i = 0; i < n; ++i) {
-        biases[i * 2] = 1;
-        biases[1 + i * 2] = ((double)rand() / RAND_MAX)-0.5;
-    }
 
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < num_prev; ++j) {
@@ -133,8 +149,6 @@ node** loss_layer(int n, node** node_prev, double* params, size_t num_params, fu
     return loss_neurons;
 }
 
-
-
 void* first_neural_network() {
 
     c_graph* c_gp;
@@ -143,32 +157,42 @@ void* first_neural_network() {
 
     int n_activate_params_layer_1 = 2, n_loss_params = 1;
 
-    double activate_params_layer_1[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 }, activate_params_layer_2[16] = {0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01},
-        activate_params_layer_3[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 };
+    double activate_params_layer_1[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 };
+
+    double weights[4][3] = { {1,2,3}, {1,2,3},{1,2,3},{1,2,3} };
+    double biases[4] = { 1,2,3,4};
 
     double loss_params[2] = { 0, 0};
-    
-    double learn_rate = 0.0001;
 
-    double iter = 50, element_iter = 5;
+    double** weights_heap = (double**)malloc(4 * sizeof(double*));
+    if (!weights_heap)return NULL;
+    for (int i = 0; i < 4; i++) {
+        weights_heap[i] = (double*)malloc(3 * sizeof(double));
+        if (!weights_heap[i])return NULL;
+        for (int j = 0; j < 3; j++) {
+            weights_heap[i][j] = weights[i][j];
+        }
+    }
+
+    double* biases_heap = (double*)malloc(4 * sizeof(double));
+    if (!biases_heap)return NULL;
+    for (int i = 0; i < 4; i++) {
+        biases_heap[i] = biases[i];
+    }
+
 
     node** input = input_layer(3);
 
     if (!input) return NULL;
 
-    node** h_layer_1 = dense_layer(4, input, 3, activate_params_layer_1, 2, leakyReLU);
+    node** h_layer_1 = dense_layer(4, input, 3, activate_params_layer_1, 2, leakyReLU, weights_heap, biases_heap);
+
+    free(weights_heap);
+    free(biases_heap);
 
     if (!h_layer_1) return NULL;
 
-    node** h_layer_2 = dense_layer(8, h_layer_1, 4, activate_params_layer_2, 2, leakyReLU);
-
-    if (!h_layer_2) return NULL;
-
-    node** h_layer_3 = dense_layer(4, h_layer_2, 8, activate_params_layer_3, 2, leakyReLU);
-
-    if (!h_layer_3) return NULL;
-
-    node** output = output_layer(2, h_layer_3, 4);
+    node** output = output_layer(2, h_layer_1, 4);
 
     if (!output) return NULL;
 
@@ -190,22 +214,13 @@ void* first_neural_network() {
 
     double inputs[3] = { 0,0,0 };
 
-    double inps[10][3] = {
-	{0.4623, 0.3280, 0.9125},
-        {0.6169, 0.9395, 0.7119},
-        {0.4685, 0.6560, 0.1282},
-        {0.9778, 0.6927, 0.0153},
-        {0.7530, 0.7885, 0.2757},
-        {0.7047, 0.3323, 0.6558},
-        {0.9477, 0.5339, 0.5517},
-        {0.9938, 0.2573, 0.2315},
-        {0.1811, 0.5801, 0.4813},
-        {0.1455, 0.5687, 0.7068}
+    double inps[1][3] = {
+	{0.4623, 0.3280, 0.9125}
     };
     
     double SE = 0.0;
     
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 1; ++i) {
         input[0]->value = inps[i][0];
     	input[1]->value = inps[i][1];
     	input[2]->value = inps[i][2];
@@ -224,7 +239,7 @@ void* first_neural_network() {
     	renew_c_graph(c_gp, n_output);
     }
 
-    printf("MSE: %lf \n", SE / 10);
+    printf("MSE: %lf \n", SE / 1);
 
     cgraph_free(c_gp, n_output);
 
