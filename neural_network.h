@@ -10,4 +10,8 @@ node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_
 
 node** loss_layer(int n, node** node_prev,  double* params, size_t num_params, func loss_func);//alloc loss layer
 
+void* print_layer(node** layer);//print layer
+
+void* print_neuron(node* neuron);//print neuron
+
 void* first_neural_network();//first neural network

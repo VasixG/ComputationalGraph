@@ -149,6 +149,18 @@ node** loss_layer(int n, node** node_prev, double* params, size_t num_params, fu
     return loss_neurons;
 }
 
+void* print_layer(int n, node** layer)
+{
+    for (int i = 0; i < n; ++i) {
+        print_neuron(layer[i]);
+    }
+}
+
+void* print_neuron(node* neuron)
+{
+    
+}
+
 void* first_neural_network() {
 
     c_graph* c_gp;
