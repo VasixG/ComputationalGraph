@@ -1,6 +1,42 @@
 
 #include "comp_graph.h"
 
+char* concatenate(const char* s1, const char* s2) {
+    // Determine lengths
+    size_t len1 = strlen(s1);
+    size_t len2 = strlen(s2);
+    size_t total_len = len1 + len2;
+
+    // Allocate memory for concatenated string (+1 for the null terminator)
+    char* result = (char*)malloc(total_len + 1);
+    if (!result) {
+        perror("Failed to allocate memory");
+        exit(EXIT_FAILURE);
+    }
+
+    strcpy_s(result, len1 + 1, s1);
+    strcpy_s(result + len1, len2 + 1, s2);
+
+    return result;
+}
+
+int countDigits(int value) {
+    if (value == 0) return 1;
+    if (value < 0) value = -value; // Convert to positive
+    return (int)log10(value) + 1;
+}
+
+char* int_to_string(int value) {
+    int size = countDigits(value) + (value < 0 ? 1 : 0) + 1+1; // +1 for negative sign if any, +1 for null terminator
+    char* number = (char*)malloc(size * sizeof(char));
+    if (!number) {
+        perror("Failed to allocate memory");
+        exit(EXIT_FAILURE);
+    }
+    sprintf_s(number, size, "%d_", value); // Note the size argument to ensure we don't exceed buffer
+    return number;
+}
+
 //mean square loss
 double mse(double x, double* p) {
     return 0.5 * (x - p[0]) * (x - p[0]);
@@ -45,7 +81,7 @@ double exponent(double x, double* p)
 }
 
 //allocate memory for node
-node* node_alloc(double val, double* p, size_t n, func a_func, size_t c) {
+node* node_alloc(char* name, double val, double* p, size_t n,char* act_name,  func a_func, size_t c) {
 
     node* nd = malloc(sizeof(node));
 
@@ -55,6 +91,8 @@ node* node_alloc(double val, double* p, size_t n, func a_func, size_t c) {
 
     if (!nd->prev) return NULL;
 
+    nd->name = name;
+
     nd->c = c;
     nd->value = val;
 
@@ -63,6 +101,7 @@ node* node_alloc(double val, double* p, size_t n, func a_func, size_t c) {
     nd->n = n;
 
     nd->act_func = a_func;
+    nd->act_name = act_name;
 
     nd->visited_front = 0;
 
@@ -139,6 +178,112 @@ double compute_forward(node* nd) {
 
         return nd->act_func(nd->value, nd->params);
     }
+}
+
+void* print_compGraph(c_graph* c_gp, size_t n, FILE* f)
+{
+
+    fprintf(f,"#include <stdio.h>\n#include <comp_graph.h>\n#include <stdlib.h>\n\n");
+
+    fprintf(f,"int main() {\n");
+    for (int i = 0; i < n; ++i) {
+        print_node((c_gp->root)[i], f);
+    }
+
+    fprintf(f,"c_graph c_gp;\n");
+    fprintf(f,"node* roots[%d] ={", n);
+    for (int i = 0; i < n - 1; ++i) {
+        fprintf(f,"&%s,", (c_gp->root)[i]->name);
+    }
+    fprintf(f,"&%s};\n", (c_gp->root)[n - 1]->name);
+
+    fprintf(f,"c_gp.root = roots;\n");
+    fprintf(f,"}");
+
+}
+
+void* print_node(node* nd, FILE* f)
+{
+    if (nd->c == 0 && !nd->visited_front) {
+        fprintf(f,"node %s;\n", nd->name);
+        fprintf(f, "node* prevNodes%s =NULL;\n", nd->name);
+        fprintf(f, "%s.name = \"%s\";\n", nd->name, nd->name);
+        fprintf(f, "%s.ref_num = %d;\n", nd->name, nd->ref_num);
+        fprintf(f, "%s.value = %lf;\n", nd->name, nd->value);
+        fprintf(f, "%s.prev = &prevNodes%s;\n", nd->name, nd->name);
+
+        fprintf(f, "%s.c = %d;\n", nd->name, nd->c);
+        fprintf(f, "%s.curr_c = %d;\n", nd->name, nd->curr_c);
+
+
+        if (nd->n != 0) {
+            fprintf(f, "double actParams%s[%d] ={", nd->name, nd->n);
+            for (int i = 0; i < nd->n - 1; ++i) {
+                fprintf(f, "%lf,", (nd->params)[i]);
+            }
+            fprintf(f, "%d};\n", (nd->params)[nd->n - 1]);
+        }
+        else {
+            fprintf(f, "double actParams%s =NULL", nd->name);
+        }
+        
+        fprintf(f, "%s.params = actParams%s;\n", nd->name, nd->name);
+        fprintf(f, "%s.n = %d;\n", nd->name, nd->n);
+
+        fprintf(f, "%s.visited_front = %d;\n", nd->name, nd->visited_front);
+        fprintf(f, "%s.act_func = %s;\n", nd->name, nd->act_name);
+
+        fprintf(f, "\n\n");
+        nd->visited_front = 1;
+        return NULL;
+    }
+    else {
+        for (int i = 0; i < nd->c; ++i) {
+
+            if (!(nd->prev)[i]->visited_front) {
+                print_node((nd->prev)[i],f);
+            }
+        }
+
+        nd->visited_front = 1;
+
+        fprintf(f, "node %s;\n", nd->name);
+        
+        fprintf(f, "node* prevNodes%s[%d] ={", nd->name, nd->c);
+        for (int i = 0; i < nd->c - 1; ++i) {
+            fprintf(f, "&%s,", (nd->prev)[i]->name);
+        }
+        fprintf(f, "&%s};\n", (nd->prev)[nd->c - 1]->name);
+
+        fprintf(f, "%s.name = \"%s\"; \n", nd->name, nd->name);
+        fprintf(f, "%s.ref_num = %d;\n", nd->name, nd->ref_num);
+        fprintf(f, "%s.value = %lf;\n", nd->name, nd->value);
+        fprintf(f, "%s.prev = &prevNodes%s;\n", nd->name, nd->name);
+
+        fprintf(f, "%s.c = %d;\n", nd->name, nd->c);
+        fprintf(f, "%s.curr_c = %d;\n", nd->name, nd->curr_c);
+
+        if (nd->n != 0) {
+            fprintf(f, "double actParams%s[%d] ={", nd->name, nd->n);
+            for (int i = 0; i < nd->n - 1; ++i) {
+                fprintf(f, "%lf,", (nd->params)[i]);
+            }
+            fprintf(f, "%d};\n", (nd->params)[nd->n - 1]);
+        }
+        else {
+            fprintf(f, "double actParams%s =NULL", nd->name);
+        }
+
+        fprintf(f, "%s.params = actParams%s;\n", nd->name, nd->name);
+        fprintf(f, "%s.n = %d;\n", nd->name, nd->n);
+
+        fprintf(f, "%s.visited_front = %d;\n", nd->name, nd->visited_front);
+        fprintf(f, "%s.act_func = %s;\n", nd->name, nd->act_name);
+
+        fprintf(f, "\n\n");
+        return NULL;
+    }
+
 }
 
 

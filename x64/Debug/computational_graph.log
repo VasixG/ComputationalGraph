@@ -1,3 +1,33 @@
-﻿  neural_network.c
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(246): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
+﻿  comp_graph.c
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(194,15): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(194,15): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(211,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(211,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(215,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(215,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(216,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(216,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(220,24): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(220,24): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(224,24): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "double"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(231,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(231,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(233,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(233,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(252,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(252,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(259,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(259,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(263,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(263,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(264,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(264,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(267,24): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(267,24): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(271,24): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "double"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(278,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(278,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(280,20): warning C4477: "fprintf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(280,20): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\vasil\Documents\ComputationalGraph\comp_graph.c(203): warning C4716: print_compGraph: должна возвращать значение
   computational_graph.vcxproj -> C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe

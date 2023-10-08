@@ -16,8 +16,11 @@ node** input_layer(int n)
         p_input[1 + i * 2] = 0;
     }
 
-    for (int i = 0; i < n; ++i) {
-        input_neurons[i] = node_alloc(0, &p_input[2 * i], 2, linear, 0);
+    char* input_name = "input";
+    for (int i = 0; i < n; ++i) {       
+        char* number = int_to_string(i);
+        input_neurons[i] = node_alloc(concatenate(input_name, number), 0, &p_input[2 * i], 2,"linear", linear, 0);
+        free(number);
     }
 
     return input_neurons;
@@ -38,8 +41,13 @@ node** output_layer(int n, node** prev, size_t num_prev)
         p_output[1 + i * 2] = 0;
     }
 
+    char* output_name = "output";
+
     for (int i = 0; i < n; ++i) {
-        output_neurons[i] = node_alloc(0, &p_output[2*i], 2, linear, num_prev);
+        
+        const char* number = int_to_string(i);
+        output_neurons[i] = node_alloc(concatenate(output_name, number), 0, &p_output[2*i], 2, "linear", linear, num_prev);
+        free(number);
     }
 
     for (int i = 0; i < n; ++i) {
@@ -51,7 +59,7 @@ node** output_layer(int n, node** prev, size_t num_prev)
     return output_neurons;
 }
 
-node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_t num_params, func a_func, double** custom_weights, double* custom_biases)
+node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_t num_params,char* act_name, func a_func, double** custom_weights, double* custom_biases)
 {
     double* weights = malloc(n * num_prev * 2 * sizeof(double));
     if (!weights) return NULL;
@@ -98,19 +106,30 @@ node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_
 
     if (!activation_neurons) return NULL;
 
-
+    char* weight_name = "weight";
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < num_prev; ++j) {
-            weight_neurons[j + i * num_prev] = node_alloc(0, &weights[(i * num_prev + j) * 2], 2, linear, 1);
+            char* row = int_to_string(i);
+            char* col = int_to_string(j);
+            char* weight_row = concatenate(weight_name, row);
+            weight_neurons[j + i * num_prev] = node_alloc(concatenate(weight_row,col), 0, &weights[(i * num_prev + j) * 2], 2, "linear", linear, 1);
+            free(row);
+            free(col);
         }
     }
 
+    char* bias_name = "bias";
     for (int i = 0; i < n; ++i) {
-        biases_neurons[i] = node_alloc(0, &biases[2 * i], 2, linear, num_prev);
+        char* number = int_to_string(i);
+        biases_neurons[i] = node_alloc(concatenate(bias_name, number), 0, &biases[2 * i], 2, "linear", linear, num_prev);
+        free(number);
     }
 
+    char* activation_name = "actfunc";
     for (int i = 0; i < n; ++i) {
-        activation_neurons[i] = node_alloc(0, &params[i * num_params], num_params, a_func,  1);
+        char* number = int_to_string(i);
+        activation_neurons[i] = node_alloc(concatenate(activation_name, number), 0, &params[i * num_params], num_params, act_name, a_func, 1);
+        free(number);
     }
 
     for (int i = 0; i < n; ++i) {
@@ -132,14 +151,17 @@ node** dense_layer(size_t n, node** prev, size_t num_prev, double* params, size_
     return activation_neurons;
 }
 
-node** loss_layer(int n, node** node_prev, double* params, size_t num_params, func loss_func)
+node** loss_layer(int n, node** node_prev, double* params, size_t num_params,char* loss_func_name, func loss_func)
 {
     node** loss_neurons = malloc(n * sizeof(node*));
 
     if (!loss_neurons) return NULL;
 
+    char* loss_name = "loss";
     for (int i = 0; i < n; ++i) {
-        loss_neurons[i] = node_alloc(0,&params[i * num_params], num_params, loss_func, 1);
+        char* number = int_to_string(i);
+        loss_neurons[i] = node_alloc(concatenate(loss_name, number), 0,&params[i * num_params], num_params, loss_func_name, loss_func, 1);
+        free(number);
     }
 
     for (int i = 0; i < n; ++i) {
@@ -147,18 +169,6 @@ node** loss_layer(int n, node** node_prev, double* params, size_t num_params, fu
     }
 
     return loss_neurons;
-}
-
-void* print_layer(int n, node** layer)
-{
-    for (int i = 0; i < n; ++i) {
-        print_neuron(layer[i]);
-    }
-}
-
-void* print_neuron(node* neuron)
-{
-    
 }
 
 void* first_neural_network() {
@@ -169,7 +179,7 @@ void* first_neural_network() {
 
     int n_activate_params_layer_1 = 2, n_loss_params = 1;
 
-    double activate_params_layer_1[8] = { 0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01 };
+    double activate_params_layer_1[16] = { 0.01,0,0.01,0,0.01,0,0.01,0,0.01,0,0.01,0,0.01,0,0.01,0 };
 
     double weights[4][3] = { {1,2,3}, {1,2,3}};
     double biases[4] = { 1,2};
@@ -197,7 +207,7 @@ void* first_neural_network() {
 
     if (!input) return NULL;
 
-    node** h_layer_1 = dense_layer(2, input, 3, activate_params_layer_1, 2, leakyReLU, weights_heap, biases_heap);
+    node** h_layer_1 = dense_layer(2, input, 3, activate_params_layer_1, 2,"leakyReLU", leakyReLU, weights_heap, biases_heap);
 
     free(weights_heap);
     free(biases_heap);
@@ -208,7 +218,7 @@ void* first_neural_network() {
 
     if (!output) return NULL;
 
-    node** loss = loss_layer(2, output, loss_params, 1, mse);
+    node** loss = loss_layer(2, output, loss_params, 1, "mse",mse);
 
     if (!loss) return NULL;
 
@@ -223,6 +233,14 @@ void* first_neural_network() {
     (c_gp->root)[0] = loss[0];
 
     (c_gp->root)[1] = loss[1];
+    FILE* file;
+    errno_t err = fopen_s(&file, "hardcodeNN.c", "w");
+    if (err) {
+        perror("Failed to open file");
+        return 1;
+    }
+    print_compGraph(c_gp, 2, file);
+    fclose(file);
 
     double inputs[3] = { 0,0,0 };
 
@@ -254,5 +272,4 @@ void* first_neural_network() {
     printf("MSE: %lf \n", SE / 1);
 
     cgraph_free(c_gp, n_output);
-
 }
