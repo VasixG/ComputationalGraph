@@ -36,7 +36,7 @@ git checkout -b <СУФФИКС/НАЗВАНИЕ_НОВОЙ_ВЕТКИ>
 ### Правила оформления(можно прочитать [тут](https://www.conventionalcommits.org/en/v1.0.0/) ):
 
 1. Название коммита от его тела отделяется пустой строкой.
-2. В названии коммита должны быть теги из [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) `feat/`, `fix/`, `BREAKING CHANGE` и тд.
+2. В названии коммита должны быть теги из [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) `feat:`, `fix:`, `BREAKING CHANGE:` и тд.
 3. В названии коммита должно быть около 50 символов или меньше.
 5. Название коммита не должно заканчиваться точкой.
 6. Название коммита пишется в повелительном наклонении.
