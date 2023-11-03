@@ -1,2 +1,0 @@
-C:\Users\vasil\Documents\CodeBlocks\computational_graph\x64\Debug\computational_graph.exe
-C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe
