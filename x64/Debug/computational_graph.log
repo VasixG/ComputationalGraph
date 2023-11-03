@@ -1,3 +1,0 @@
-﻿  neural_network.c
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(246): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
-  computational_graph.vcxproj -> C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe
