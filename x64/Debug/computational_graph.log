@@ -1,8 +1,0 @@
-﻿  neural_network.c
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(143,62): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(144,63): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(153,79): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(154,80): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(158): warning C4716: dense_fit: должна возвращать значение
-C:\Users\vasil\Documents\ComputationalGraph\neural_network.c(295): warning C4715: first_neural_network: значение возвращается не при всех путях выполнения
-  computational_graph.vcxproj -> C:\Users\vasil\Documents\ComputationalGraph\x64\Debug\computational_graph.exe
