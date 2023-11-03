@@ -1,58 +1,21 @@
-# Работа с GitHub
+# Computational Graph
 
-## Как работаем
+This project is a pure C implementation of a computational graph realized as a multilist data structure, along with a neural network constructor that builds upon this graph. 
 
-### Начало работы
+## Table of Contents
 
-1. Выбираем issue над которой будем работать.
-2. Называем ветку основываясь на задаче.
-3. Если делаете новую задачу. Клонируем себе репозиторий, переходим в ветку dev, создаем ветку для своих задач:
-```bash
-git clone git@github.com:ai-integration-company/znakomsya.git
-cd znakomsya
-git checkout dev
-git checkout -b <СУФФИКС/НАЗВАНИЕ_НОВОЙ_ВЕТКИ>
-```
-4. Если присоединяетесь к задаче - просто переходим в ветку задачи.
-## Рабочий цикл Git (коммит-пуш)
+- [Introduction](#introduction)
+- [Features](#features)
 
-1. Работа над задачей:
-2. Добавление изменений для коммита:
-    ```bash
-    git add <done stuff>
-    ```
-3. Коммит изменений:
-    ```bash
-    git commit -m "Описание вашего коммита"
-    ```
+## Introduction
 
-4. Пуш изменений в вашу ветку:
-    ```bash
-    git push origin <new_feature>
-    ```
+The project serves as a foundational framework for representing and manipulating computational graphs through multilist data structures in the C programming language. Additionally, it includes a neural network constructor which can be used to build and train neural networks using the defined computational graph.
 
-## Оформление коммитов
+## Features
 
-### Правила оформления(можно прочитать [тут](https://www.conventionalcommits.org/en/v1.0.0/) ):
-
-1. Название коммита от его тела отделяется пустой строкой.
-2. В названии коммита должны быть теги из [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) `feat:`, `fix:`, `BREAKING CHANGE:` и тд.
-3. В названии коммита должно быть около 50 символов или меньше.
-5. Название коммита не должно заканчиваться точкой.
-6. Название коммита пишется в повелительном наклонении.
-7. В теле коммита строчки должны быть длиной не более 72 символов.
-8. В теле коммита описывается "почему" и "что", а не "как".
-
-### Пример оформления коммита:
-
-```bash
-git commit -m "feat: add NN UI
-
-Make UI to work with NN.
-Make new interfaces to work with RL.
-"
-```
-## Работа с C кодом 
-Пишем заголовочные файлы. Комментируем код.
-
-
+- **Multilist Graph Representation**: Efficiently stores and manipulates computational graphs using multilist data structures.
+- **Neural Network Constructor**: Allows users to construct custom neural networks from the computational graph.
+- **Memory Management**: Handles dynamic memory allocation and deallocation to manage the multilist graph and neural network structures.
+- **Graph Operations**: Supports various operations including node insertion, deletion, and traversal.
+- **Neural Network Training**: Includes functionality to train the constructed neural networks with backpropagation (optional module).
+- **Pure C Implementation**: Utilizes C for high-performance computations without relying on external libraries.
