@@ -8,8 +8,8 @@
 2. Называем ветку основываясь на задаче.
 3. Если делаете новую задачу. Клонируем себе репозиторий, переходим в ветку dev, создаем ветку для своих задач:
 ```bash
-git clone git@github.com:ai-integration-company/znakomsya.git
-cd znakomsya
+git clone git@github.com:VasixG/ComputationalGraph.git
+cd ComputationalGraph
 git checkout dev
 git checkout -b <СУФФИКС/НАЗВАНИЕ_НОВОЙ_ВЕТКИ>
 ```
